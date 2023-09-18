@@ -7,12 +7,12 @@ Boilerplate Koalità avec
 
 ## Process 
 
-cd projets
-git clone https://github.com/koalita-corsica/boilerplate.git [nom du nouveau projet]
-cd [nom du nouveau projet]
-cd web && yarn && cd ../studio && yarn && cd ../
-créer le repo sur git
-créer le projet dans sanity
-git remote add origin [url du nouveau projet git]
-git branch -M main
-git push -u origin main
+- cd projets
+- git clone https://github.com/koalita-corsica/boilerplate.git [nom du nouveau projet]
+- cd [nom du nouveau projet]
+- cd web && yarn && cd ../studio && yarn && cd ../
+- créer le repo sur git
+- créer le projet dans sanity
+- git remote set-url origin [url du nouveau projet git]
+- git branch -M main
+- git push -u origin main

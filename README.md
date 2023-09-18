@@ -12,6 +12,6 @@ Boilerplate Koalità avec
   - cd [nom du nouveau projet] cd web && yarn && cd ../studio && yarn && cd ../ 
   - créer le repo sur git 
   - créer le projet dans sanity 
-  - git remote add origin [url du nouveau projet git] 
+  - git remote set-url origin [url du nouveau projet git] 
   - git branch -M main 
   - git push -u origin main

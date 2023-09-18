@@ -16,5 +16,4 @@ export const schemaTypes = [
     // obj
     contenugprh,
     gallerieimg
-
 ]

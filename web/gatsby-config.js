@@ -7,14 +7,41 @@
 /**
  * @type {import('gatsby').GatsbyConfig}
  */
+
+const siteUrl = process.env.URL || `https://koalita.corsica`
+
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
-    siteUrl: `https://gatsbystarterdefaultsource.gatsbyjs.io/`,
+    title: `Koalità Default Starter`,
+    description: `Koalità - Koaliplate`,
+    author: `@_jiann`,
+    siteUrl: `https://koalita.corsica`,
   },
   plugins: [
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        excludes: ["/**/404", "/**/404.html"],
+        createLinkInHead: true,
+        query: `
+        {
+          allSitePage {
+            nodes {
+              path
+            }
+          }
+        }
+        `,
+        resolveSiteUrl: () => siteUrl,
+        resolvePages: ({
+          allSitePage: {nodes: allPages},
+        }) => {
+          return allPages.map(page => {
+            return { ...page }
+          })
+        }
+      }
+    },
     `gatsby-plugin-image`,
     {
       resolve: `gatsby-source-filesystem`,
@@ -23,28 +50,35 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
-    `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
+        name: `Koalità.corsica`,
+        short_name: `Koalità`,
         start_url: `/`,
         background_color: `#663399`,
         // This will impact how browsers show your PWA/website
         // https://css-tricks.com/meta-theme-color-and-trickery/
         // theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/k-koalita.png`, // This path is relative to the root of the site.
       },
     },
     {
       resolve: "gatsby-source-sanity",
       options: {
-        projectId: "abc123",
-        dataset: "blog",
+        projectId: "u9nx6cxn",
+        dataset: "production",
       },
+    },
+    {
+      resolve: `gatsby-plugin-sass`,
+      options: {
+        implementation: require("sass"),
+        additionalData: `@use "${__dirname}/src/styles/variables" as var;`
+      }
     },
   ],
 }

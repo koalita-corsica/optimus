@@ -1,0 +1,39 @@
+# .github/workflows/rebuild.yml
+name: rebuild
+run-name: ${{ github.actor }} is rebuilding the site
+on: 
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true      
+jobs:
+  rebuild-site:
+    runs-on: ubuntu-latest
+    steps:
+
+
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Installation de yarn
+        run: npm install --global yarn
+          
+      - name: Install Project Dependencies
+        run: cd web && yarn
+        
+      - name: Build
+        run: cd web && yarn clean && yarn build
+
+      - name: deploy Firebase
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          entryPoint: ./web
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_KOALITA }}'
+          projectId: koalita
+          channelId: live

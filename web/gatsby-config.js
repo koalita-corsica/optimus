@@ -55,8 +55,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Koalità.corsica`,
-        short_name: `Koalità`,
+        name: `Domaine Vaccelli`,
+        short_name: `Vaccelli`,
         start_url: `/`,
         background_color: `#663399`,
         // This will impact how browsers show your PWA/website

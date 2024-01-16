@@ -12,8 +12,8 @@ const siteUrl = process.env.URL || `https://koalita.corsica`
 
 module.exports = {
   siteMetadata: {
-    title: `Koalità Default Starter`,
-    description: `Koalità - Koaliplate`,
+    title: `Domaine Vaccelli`,
+    description: `Site du domaine Vaccelli`,
     author: `@_jiann`,
     siteUrl: `https://koalita.corsica`,
   },
@@ -69,7 +69,7 @@ module.exports = {
     {
       resolve: "gatsby-source-sanity",
       options: {
-        projectId: "u9nx6cxn",
+        projectId: "0w9zpvxh",
         dataset: "production",
       },
     },

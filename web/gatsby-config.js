@@ -12,8 +12,8 @@ const siteUrl = process.env.URL || `https://koalita.corsica`
 
 module.exports = {
   siteMetadata: {
-    title: `Koalità Default Starter`,
-    description: `Koalità - Koaliplate`,
+    title: `Domaine Vaccelli`,
+    description: `Site du domaine Vaccelli`,
     author: `@_jiann`,
     siteUrl: `https://koalita.corsica`,
   },
@@ -55,8 +55,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Koalità.corsica`,
-        short_name: `Koalità`,
+        name: `Domaine Vaccelli`,
+        short_name: `Vaccelli`,
         start_url: `/`,
         background_color: `#663399`,
         // This will impact how browsers show your PWA/website
@@ -69,7 +69,7 @@ module.exports = {
     {
       resolve: "gatsby-source-sanity",
       options: {
-        projectId: "u9nx6cxn",
+        projectId: "0w9zpvxh",
         dataset: "production",
       },
     },

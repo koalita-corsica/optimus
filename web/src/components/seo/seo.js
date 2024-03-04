@@ -6,38 +6,18 @@
  */
 
 import * as React from "react"
-import { useStaticQuery, graphql } from "gatsby"
+const Seo = ({ description, title }) => {
 
-function Seo({ description, title, children }) {
-  const { site } = useStaticQuery(
-    graphql`
-      query {
-        site {
-          siteMetadata {
-            title
-            description
-            author
-          }
-        }
-      }
-    `
-  )
-
-  const metaDescription = description || site.siteMetadata.description
-  const defaultTitle = site.siteMetadata?.title
+  const metaDescription = description || "Un duo d’experts au service de la digitalisation de votre communication pour vous faire connaître et attirer de nouveaux clients."
+  const siteTitle = title || "Koalità accompagne les entreprises dans leur croissance sur internet"
 
   return (
     <>
-      <title>{defaultTitle ? `${title} | ${defaultTitle}` : title}</title>
+      <title>{siteTitle}</title>
       <meta name="description" content={metaDescription} />
-      <meta property="og:title" content={title} />
+      <meta property="og:title" content={siteTitle} />
       <meta property="og:description" content={metaDescription} />
       <meta property="og:type" content="website" />
-      <meta name="twitter:card" content="summary" />
-      <meta name="twitter:creator" content={site.siteMetadata?.author || ``} />
-      <meta name="twitter:title" content={title} />
-      <meta name="twitter:description" content={metaDescription} />
-      {children}
     </>
   )
 }

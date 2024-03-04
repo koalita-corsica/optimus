@@ -9,7 +9,7 @@ const HighlightIcon = () => (
 const HighlightDecorator = (props : any) => (
   <span style={{ backgroundColor: '#663189' }}>{props.children}</span>
 )
-const GallerieIcone = () => (
+const GalerieIcone = () => (
   <BsFillGrid1X2Fill color="white" />
 )
 
@@ -40,8 +40,8 @@ export default defineType({
       ], 
     },
     {
-      type: 'gallerieimg',
-      icon: GallerieIcone,
+      type: 'galerieimg',
+      icon: GalerieIcone,
     }
   ]
 })

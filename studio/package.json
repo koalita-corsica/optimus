@@ -18,12 +18,12 @@
     "@phosphor-icons/react": "^2.0.14",
     "@react-icons/all-files": "^4.1.0",
     "@sanity/color-input": "^3.1.0",
-    "@sanity/vision": "^3.16.4",
     "@sanity/locale-fr-fr": "^1.0.1",
+    "@sanity/vision": "^3.16.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-is": "^18.2.0",
-    "sanity": "^3.16.4",
+    "sanity": "^3.23.1",
     "styled-components": "^5.3.9"
   },
   "devDependencies": {

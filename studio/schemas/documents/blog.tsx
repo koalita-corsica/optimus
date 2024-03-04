@@ -67,9 +67,9 @@ export default {
         title: "Contenu"
       },
       {
-        name: 'gallerieimg',
-        type: 'gallerieimg',
-        title: 'gallerieimg'
+        name: 'galerieimg',
+        type: 'galerieimg',
+        title: 'Galerie'
       }
     ],
     preview: {

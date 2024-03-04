@@ -4,8 +4,8 @@ import categories from './documents/categories'
 import missions from './documents/ordering_example'
 
 // Objets
-import contenugprh from './objects/RichTextEditor'
-import gallerieimg from './objects/gallerie'
+import RichTextEditor from './objects/RichTextEditor'
+import galerieimg from './objects/galerie'
 
 export const schemaTypes = [
     // Documents
@@ -14,6 +14,6 @@ export const schemaTypes = [
     categories,
 
     // obj
-    contenugprh,
-    gallerieimg
+    RichTextEditor,
+    galerieimg
 ]

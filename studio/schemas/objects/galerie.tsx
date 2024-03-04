@@ -2,8 +2,8 @@ import React from 'react'
 import { defineType } from 'sanity'
 
 export default defineType({
-  name: 'gallerieimg',
-  title: 'Gallerie',
+  name: 'galerieimg',
+  title: 'Galerie',
   type: 'object',
   fields: [
     {

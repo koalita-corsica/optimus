@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+// Threshold du responsive 
+$tablette: 1279px;
+$mobile: 620px;
+$hybride: 948px; // Pour certaines parties ou on veut un rendu mobile même sur tablette
+
+$gris : #3D3D3D;
+$rouge: #A60A0A;
+$blanc: #ffffff;
+
+$rougealt: #C1002B;
+$rougetrois: #DE0123;
+$grisclair: #EFEFEF;
+
+@mixin titre($size, $weight, $style,$margin : 0, $padding : 0, $line-height : normal) {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: $weight;
+    font-style: $style;
+    font-size: $size;
+    color: $gris;
+    margin:$margin;
+    padding:$padding;
+    line-height: $line-height;
+}
+  
+@mixin texte($size,$weight, $style) {
+font-family: "Work Sans", sans-serif;
+font-optical-sizing: auto;
+font-weight: $weight;
+font-style: $style;
+font-size: $size;
+color: $gris;
+  }
+
+@mixin bouton($color, $hover, $padding, $height, $width) {
+    text-decoration: none;
+    color: $color;
+    background-color: $hover;
+    border:solid 1px $hover;
+    padding: $padding;
+    height: $height;
+    width: $width;
+    &:hover {
+        background-color: $color;
+        color: $hover;
+    }
+}
+
+@mixin liste($type:ul) {
+    @if $type == "ul" {
+        list-style-type: disc;
+    }
+    @if type == "ol" {
+        list-style-type: decimal;
+    }
+    li {
+        margin-left: 1.1rem;
+    }
+}

@@ -1,10 +1,11 @@
-import React from 'react'
 import { defineType } from 'sanity'
 
 export default defineType({
-  name: 'galerieimg',
-  title: 'Galerie',
+  name: 'une',
   type: 'object',
+  fieldsets: [
+    {name: 'une', title: 'Activité mise en avant',}
+  ],
   fields: [
     {
         title: 'Images',
@@ -20,6 +21,12 @@ export default defineType({
               },
             ]
         }],
-      }
+    },
+    {
+        name: 'texteune',
+        type: 'richText',
+        title: "Texte de présentation",
+        description: "Le texte qui vient illustrer l\'activité mise en avant"
+    },
   ]
 })

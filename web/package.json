@@ -12,6 +12,7 @@
     "gatsby": "^5.12.4",
     "gatsby-plugin-image": "^3.12.3",
     "gatsby-plugin-manifest": "^5.12.0",
+    "gatsby-plugin-sanity-image": "^0.13.4",
     "gatsby-plugin-sass": "^6.12.0",
     "gatsby-plugin-sharp": "^5.12.3",
     "gatsby-plugin-sitemap": "^6.12.3",

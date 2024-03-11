@@ -1,0 +1,12 @@
+[data-section="hero"] {
+    display: grid;
+    grid-template-columns: repeat(12,1fr);
+    column-gap: 1.25rem;
+    [data-content] {
+        grid-column: 2 / 13;
+    }
+    [data-img] {
+        grid-column: 8 / 13;
+        width: 100%;
+    }
+}

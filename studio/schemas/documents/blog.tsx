@@ -11,22 +11,6 @@ export default {
         title: 'Titre'
       },
       {
-        title: 'Slug',
-        name: 'slug',
-        type: 'slug',
-        options: {
-          source: 'titre',
-          slugify: (input : any) => input
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, '')
-            .replace(/[^a-zA-Z0-9]/g, ' ')
-            .replace(/\s+/g, '-')
-            .replace(/-+$/, '')
-            .slice(0, 200)
-            .toLowerCase()
-        }
-      },
-      {
         title: 'Image principale',
         name: 'img',
         type: 'image',
@@ -63,7 +47,7 @@ export default {
       },
       {
         name: 'contenu',
-        type: 'contenugprh',
+        type: 'richText',
         title: "Contenu"
       },
       {

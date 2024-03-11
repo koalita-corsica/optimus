@@ -8,14 +8,14 @@
  * @type {import('gatsby').GatsbyConfig}
  */
 
-const siteUrl = process.env.URL || `https://koalita.corsica`
+const siteUrl = process.env.URL || `https://agexbe.com`
 
 module.exports = {
   siteMetadata: {
-    title: `Koalità Default Starter`,
-    description: `Koalità - Koaliplate`,
+    title: `Agex BE`,
+    description: `Agex BE by Koalità`,
     author: `@_jiann`,
-    siteUrl: `https://koalita.corsica`,
+    siteUrl: `https://agexbe.com`,
   },
   plugins: [
     {
@@ -63,13 +63,20 @@ module.exports = {
         // https://css-tricks.com/meta-theme-color-and-trickery/
         // theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/k-koalita.png`, // This path is relative to the root of the site.
+        icon: `src/images/example.png`, // This path is relative to the root of the site.
       },
     },
     {
       resolve: "gatsby-source-sanity",
       options: {
-        projectId: "u9nx6cxn",
+        projectId: "mm0iz8pf",
+        dataset: "production",
+      },
+    },
+    {
+      resolve: "gatsby-plugin-sanity-image",
+      options: {
+        projectId: "mm0iz8pf",
         dataset: "production",
       },
     },

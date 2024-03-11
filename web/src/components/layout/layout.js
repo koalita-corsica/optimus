@@ -7,25 +7,35 @@
 
 import * as React from "react"
 
-import Header from "./header"
+import Header from "../header/header"
 import Footer from "../footer/footer"
-import "./layout.scss"
+import * as layoutStyle from './layout.module.scss'
+import { Link } from "gatsby"
 
 const Layout = ({ children }) => {
-
   return (
     <>
       <Header />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: `var(--size-content)`,
-          padding: `var(--size-gutter)`,
-        }}
-      >
+      <h1 className={layoutStyle.titre}>h1</h1>
+      <h2>h2</h2>
+      <h3>h3</h3>
+      <h4>h4</h4>
+      <p>Body</p>
+      <Link to="#" data-link="Internal">Link</Link>
+      <br />
+      <Link to="#" data-link="Item">Item</Link>
+      <ul>
+        <li>List</li>
+        <li>List</li>
+        <li>List</li>
+      </ul>
+      <ol>
+        <li>List</li>
+        <li>List</li>
+        <li>List</li>
+      </ol>
         <main>{children}</main>
         <Footer />
-      </div>
     </>
   )
 }

@@ -1,0 +1,39 @@
+
+
+// Titres par défaut
+h1 {
+    @include var.titre(3rem, 600, normal);
+  }
+
+h2 {
+  @include var.titre(2.5rem, 500, normal); // 40px / 16px = 2.5rem
+}
+
+h3 {
+  @include var.titre(2.1875rem, 400, normal); // 35px / 16px = 2.1875rem
+}
+
+h4 {
+  @include var.titre(1.5rem, 300, normal); // 24px / 16px = 1.5rem
+}
+
+// Textes par défaut
+p, ul, ol, li, a, span {
+    @include var.titre(1rem, 400, normal); // 16px / 16px = 1rem
+}
+
+.item {
+  @include var.texte(0.75rem, 300, normal); // 12px / 16px = 0.75rem
+}
+
+.cta {
+    @include var.texte(0.75rem, 500, normal); // 12px / 16px = 0.75rem
+  }
+
+ul {
+    @include var.liste();
+}
+
+ol {
+    @include var.liste(ol);
+}

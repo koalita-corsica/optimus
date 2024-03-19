@@ -19,9 +19,9 @@ const components = {
             </a>
           )
         },
-        vert: ({ children }) => {
+        underline: ({ children }) => {
             return (
-              <span className="vert">{children}</span>
+              <span data-underline>{children}</span>
             );
           },
     },

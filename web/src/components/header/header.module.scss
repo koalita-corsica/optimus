@@ -1,0 +1,106 @@
+.headerus {
+    margin: 0;
+    height: 90px;
+    border: solid 1px black;
+    padding: 0 1.5rem;
+    z-index: 2;
+    @media (max-width:var.$hybride) {
+        height: 46px;
+    }
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    img {
+        height: 100%;
+        width: 150px;
+        object-fit: cover;
+        object-position: center;
+        border: solid 1px black;
+    }
+    nav {
+        margin: 0;
+        @media (max-width:var.$hybride) {
+            display: none;
+            height: calc(100vh - 46px);
+            background-color:var.$grisclair;
+            width: 100vw;
+            z-index: 3;
+            position: absolute;
+            top: 45px;
+            left: 0;
+            justify-content: center
+        }
+        ul {
+            display: flex;
+            list-style: none;
+            gap: 1rem;
+            z-index: 4;
+            @media (max-width:var.$tablette) {
+                gap: 0;
+            }
+            @media (max-width:var.$hybride) {
+                flex-direction: column;
+                margin: 1 0 0;
+                padding: 0;
+                gap: 2rem;
+                width: 100%;
+            }
+            li {
+                display: flex;
+                align-items: center;
+                width: fit-content;
+                @media (max-width:var.$hybride) {
+                    width: 100%;
+                    padding: 0;
+                    margin: 0;
+                    justify-content: center;
+                }
+                a {
+                    text-decoration: none;
+                    text-align: center;
+                    @media (max-width:var.$hybride) {
+                        font-weight: 600;
+                        text-align: center;
+                    }
+                }
+                &:last-child {
+                    @include var.bouton(var.$blanc, var.$rouge, var.$rouge,0.5rem 1rem, fit-content, fit-content);
+                    a {
+                        color: var.$blanc;
+                        &:hover, &:focus {
+                            color: var.$rouge;
+                        }
+                    }
+                    margin-left:2.5rem;
+                    @media (max-width:var.$hybride) {
+                        margin:1rem auto;
+                        text-align: center;
+                    }
+                }
+            }
+        }
+        .annexes {
+            display: none;
+            @media (max-width:var.$hybride) {
+                display: flex;
+                flex-direction: column;
+                margin-top: auto;
+                margin-bottom: 1vh;
+                align-items: center;
+            }
+        }
+    }
+    [data-icones] {
+        @media (min-width:var.$hybride) {
+            display: none;
+        }
+        @media (max-width:var.$hybride) {
+            .liste {
+                display: block;   
+            }
+            .croixus {
+                display: none;
+            }
+        }
+    }
+}

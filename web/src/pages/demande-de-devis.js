@@ -14,7 +14,7 @@ import Contact from "../components/contact/contact"
 
 
 export const pageQuery = graphql`
-  query IndexPage {
+  query ContacterAgex {
     index: allSanityPages(filter: {name: {eq: "Accueil"}}) {
     nodes {
       name
@@ -50,7 +50,7 @@ export const pageQuery = graphql`
 
 
 
-  const IndexPage = (data) => {
+  const ContacterAgex = (data) => {
     const source = data.data.index.nodes[0]
     const identite = Array.from(data.data.identite.nodes)
     const equipe = Array.from(data.data.equipe.nodes)
@@ -86,5 +86,5 @@ export const pageQuery = graphql`
 
 export const Head = () => <Seo title="Accueil" />
 
-export default IndexPage
+export default ContacterAgex
 

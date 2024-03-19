@@ -1,5 +1,11 @@
 
+:root {
+  box-sizing: border-box;
+}
 
+* {
+  box-sizing: inherit;
+}
 // Titres par défaut
 h1 {
     @include var.titre(3rem, 600, normal);
@@ -10,16 +16,16 @@ h2 {
 }
 
 h3 {
-  @include var.titre(2.1875rem, 400, normal); // 35px / 16px = 2.1875rem
+  @include var.titre(2.1875rem, 500, normal); // 35px / 16px = 2.1875rem
 }
 
 h4 {
-  @include var.titre(1.5rem, 300, normal); // 24px / 16px = 1.5rem
+  @include var.titre(1.5rem, 500, normal); // 24px / 16px = 1.5rem
 }
 
 // Textes par défaut
-p, ul, ol, li, a, span {
-    @include var.titre(1rem, 400, normal); // 16px / 16px = 1rem
+p, ul, ol, li, a {
+    @include var.texte(1rem, 400, normal); // 16px / 16px = 1rem
 }
 
 .item {
@@ -36,4 +42,15 @@ ul {
 
 ol {
     @include var.liste(ol);
+}
+
+[data-underline] {
+  border-bottom:var.$rougetrois solid 3px;
+}
+
+[data-element="trait"] {
+  width: 90%;
+  border-top: solid 1px var.$grisclair;
+  display: block;
+  margin: 115px auto;
 }

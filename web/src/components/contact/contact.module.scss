@@ -1,0 +1,95 @@
+[data-content="Formulaire de contact"] {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    align-items: center;
+    .fondus {
+        width: 100%;
+        object-fit: cover;
+        grid-column-start: 1;
+        grid-column-end: 13;
+        grid-row: 1 / 1;
+        z-index: 1;
+        height: 750px;
+    }
+    [data-section="Contact"] {
+        grid-row: 1 / 1;
+        grid-column: 3 /11 ;
+        background-color: #fff;
+        z-index: 2;
+        height: fit-content;
+        display: grid;
+        grid-template-columns: subgrid;
+        justify-items: center;
+        @media (max-width:var.$tablette) {
+            grid-column: 2 /12 ;
+        }
+        [data-infos="Contact"] {
+            grid-column: span 4;
+            @media (max-width:var.$hybride) {
+                grid-column: span 10;
+            }
+            [data-infos="Détails des contact"] {
+                width: fit-content;
+                margin-top: 4.5rem;
+                display: flex;
+                flex-direction: column;
+                @media (max-width:var.$hybride) {
+                    margin-top: 1.5rem;
+                }
+                h3 {
+                    border-bottom: solid 3px var.$rougetrois;
+                    margin-bottom: 2rem;
+                }
+                .contactus {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    border-bottom: solid 1px var.$grisclair;
+                }
+            }
+        }
+        form {
+            grid-column: span 4;
+            margin-top: 4.5rem;
+            margin-bottom: 4.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            @media (max-width:var.$hybride) {
+                grid-column: span 10;
+                margin-top: 1rem;
+                margin-bottom: 1.5rem;
+                width: 60%;
+            }
+            .nomus {
+                display: flex;
+                flex-direction: row;
+                gap: 0.5rem;
+                @media (max-width:var.$mobile) {
+                    flex-direction: column;
+                }
+            }
+            p {
+                margin: 0;
+            }
+            input {
+                outline-color: var.$gris;
+                width: 100%;
+            }
+            textarea {
+                outline-color: var.$gris;
+                width: 100%;
+                min-height: 100px;
+            }
+            [data-submit] {
+                @include var.bouton(var.$grisclair, var.$rouge, var.$rouge, 12px 40px, 2.2rem, fit-content);
+                align-self: end;
+                font-weight: 700;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 2rem;
+            }
+        }
+    } 
+}

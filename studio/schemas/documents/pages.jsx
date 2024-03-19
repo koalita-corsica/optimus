@@ -119,6 +119,31 @@ export default {
       }
     ],
     hidden: ({ document }) => document?.name !== 'Accueil'
-  }
+  },
+  {
+    title: 'Téléphone',
+    name: 'tel',
+    type: 'string',
+    hidden: ({ document }) => document?.name !== 'Contact'
+  },
+  {
+    title: 'Adresse Mail',
+    name: 'mail',
+    type: 'string',
+    hidden: ({ document }) => document?.name !== 'Contact'
+  },
+  {
+    title: 'Image de fond',
+    name: 'imgfond',
+    type: 'image',
+    fields: [
+      {
+        name: 'alt',
+        type: 'string',
+        title: 'Balise Alt',
+      },
+    ],
+    hidden: ({ document }) => document?.name !== 'Contact'
+  },
   ],
 }    

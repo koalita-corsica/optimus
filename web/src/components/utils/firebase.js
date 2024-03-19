@@ -21,7 +21,7 @@ if (typeof window !== "undefined") {
      const app = initializeApp(firebaseConfig);
      // eslint-disable-next-line no-unused-vars
      const analytics = getAnalytics(app);
-     logEvent(analytics, 'jean-jacques')
+     logEvent(analytics, 'Accueil triggered')
     console.log("Hey, mais regardez pas ma console !!")
   }
 

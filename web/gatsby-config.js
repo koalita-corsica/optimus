@@ -12,10 +12,10 @@ const siteUrl = process.env.URL || `https://agexbe.com`
 
 module.exports = {
   siteMetadata: {
-    title: `Agex BE`,
-    description: `Agex BE by Koalità`,
+    title: `Optimus`,
+    description: `Optimus by Koalità`,
     author: `@_jiann`,
-    siteUrl: `https://agexbe.com`,
+    siteUrl: `https://optimusfac.com`,
   },
   plugins: [
     {
@@ -55,8 +55,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Koalità.corsica`,
-        short_name: `Koalità`,
+        name: `Optimus`,
+        short_name: `opt`,
         start_url: `/`,
         background_color: `#663399`,
         // This will impact how browsers show your PWA/website
@@ -69,14 +69,14 @@ module.exports = {
     {
       resolve: "gatsby-source-sanity",
       options: {
-        projectId: "mm0iz8pf",
+        projectId: "01xufuk5",
         dataset: "production",
       },
     },
     {
       resolve: "gatsby-plugin-sanity-image",
       options: {
-        projectId: "mm0iz8pf",
+        projectId: "01xufuk5",
         dataset: "production",
       },
     },

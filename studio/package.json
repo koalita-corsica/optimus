@@ -15,26 +15,26 @@
     "sanity"
   ],
   "dependencies": {
-    "@phosphor-icons/react": "^2.0.14",
-    "@portabletext/react": "^3.0.11",
+    "@phosphor-icons/react": "^2.1.7",
+    "@portabletext/react": "^3.1.0",
     "@react-icons/all-files": "^4.1.0",
-    "@sanity/color-input": "^3.1.1",
-    "@sanity/locale-fr-fr": "^1.0.1",
-    "@sanity/vision": "^3.16.4",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-is": "^18.2.0",
-    "sanity": "^3.23.1",
-    "sanity-plugin-asset-source-unsplash": "^1.1.2",
-    "styled-components": "^5.3.9"
+    "@sanity/color-input": "^4.0.1",
+    "@sanity/locale-fr-fr": "^1.2.11",
+    "@sanity/vision": "^3.59.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-is": "^18.3.1",
+    "sanity": "^3.59.0",
+    "sanity-plugin-asset-source-unsplash": "^3.0.1",
+    "styled-components": "^6.1.13"
   },
   "devDependencies": {
-    "@sanity/eslint-config-studio": "^3.0.1",
-    "@types/react": "^18.0.25",
+    "@sanity/eslint-config-studio": "^4.0.0",
+    "@types/react": "^18.3.11",
     "@types/styled-components": "^5.1.26",
-    "eslint": "^8.6.0",
-    "prettier": "^3.0.2",
-    "typescript": "^5.1.6"
+    "eslint": "^9.11.1",
+    "prettier": "^3.3.3",
+    "typescript": "^5.6.2"
   },
   "prettier": {
     "semi": false,

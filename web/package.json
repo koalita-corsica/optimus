@@ -5,15 +5,15 @@
   "version": "1.1",
   "author": "Jiann :)",
   "dependencies": {
-    "@phosphor-icons/react": "^2.0.14",
-    "@portabletext/react": "^3.0.11",
+    "@phosphor-icons/react": "^2.1.7",
+    "@portabletext/react": "^3.1.0",
     "@react-icons/all-files": "^4.1.0",
-    "firebase": "^10.7.0",
-    "firebase-tools": "^13.5.1",
-    "gatsby": "^5.12.4",
+    "firebase": "^10.14.0",
+    "firebase-tools": "^13.20.2",
+    "gatsby": "^5.13.7",
     "gatsby-plugin-image": "^3.12.3",
     "gatsby-plugin-manifest": "^5.12.0",
-    "gatsby-plugin-sanity-image": "^0.13.4",
+    "gatsby-plugin-sanity-image": "^0.13.5",
     "gatsby-plugin-sass": "^6.12.0",
     "gatsby-plugin-sharp": "^5.12.3",
     "gatsby-plugin-sitemap": "^6.12.3",
@@ -21,12 +21,12 @@
     "gatsby-source-sanity": "^7.8.1",
     "gatsby-transformer-sharp": "^5.12.3",
     "normalize.css": "^8.0.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "sass": "^1.68.0"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "sass": "^1.79.4"
   },
   "devDependencies": {
-    "prettier": "^2.8.8"
+    "prettier": "^3.3.3"
   },
   "keywords": [
     "gatsby"

@@ -34,11 +34,11 @@ export const myTheme = buildLegacyTheme({
 
 export default defineConfig({
   name: 'default',
-  title: 'Agex BE',
+  title: 'Optimus',
   // icon: Logo,
   theme: myTheme,
 
-  projectId: 'mm0iz8pf',
+  projectId: '01xufuk5',
   dataset: 'production',
 
   plugins: [structureTool(), colorInput(), frFRLocale(), unsplashImageAsset()],

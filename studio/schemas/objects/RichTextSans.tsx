@@ -2,10 +2,10 @@
 import { defineType } from 'sanity'
 
 const underlineIcon = () => (
-  <span style={{ fontWeight: 'bold', color: '#de0123' }}>_</span>
+  <span style={{ fontWeight: 'bold', color: '#00D2A4' }}>_</span>
 )
 const underlineDecorator = (props : any) => (
-  <span style={{ borderBottom: ' solid 3px #de0123' }}>{props.children}</span>
+  <span style={{ borderBottom: ' solid 2px #00D2A4' }}>{props.children}</span>
 )
 
 

@@ -4,13 +4,13 @@ import { defineType } from 'sanity'
 import { BsFillGrid1X2Fill } from "@react-icons/all-files/bs/BsFillGrid1X2Fill";
 
 const underlineIcon = () => (
-  <span style={{ fontWeight: 'bold', color: '#de0123' }}>_</span>
+  <span style={{ fontWeight: 'bold', color: '#00D2A4' }}>_</span>
 )
 const underlineDecorator = (props : any) => (
-  <span style={{ borderBottom: ' solid 3px #de0123' }}>{props.children}</span>
+  <span style={{ borderBottom: ' solid 1px #00D2A4' }}>{props.children}</span>
 )
 const GalerieIcone = () => (
-  <BsFillGrid1X2Fill color="#de0123" />
+  <BsFillGrid1X2Fill color="#00D2A4" />
 )
 
 

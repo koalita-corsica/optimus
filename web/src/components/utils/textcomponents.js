@@ -4,7 +4,6 @@ import * as React from "react"
 const components = {
     marks: {
       internal: ({children, value}) => {
-          console.log(children, value)
           return (
             <a href={value.url} style={{textDecoration: 'underline'}}>
               {children}
@@ -12,7 +11,6 @@ const components = {
           )
         },
         link: ({children, value}) => {
-          console.log(children, value)
           return (
             <a href={value.url} target='_blank' rel="external noreferrer" style={{textDecoration: 'underline'}}>
               {children}
@@ -27,7 +25,6 @@ const components = {
     },
     types: {
       gallerieimg: ({value}) => {
-        console.log(value.img.length)
         return (
           <div data-imageplus={value.img.length}>
             {value.img.map((img, i) => {

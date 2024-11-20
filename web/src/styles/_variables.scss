@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 
 // Threshold du responsive 
 $tablette: 1279px;
@@ -6,15 +6,21 @@ $mobile: 620px;
 $hybride: 948px; // Pour certaines parties ou on veut un rendu mobile même sur tablette
 
 $gris : #3D3D3D;
-$rouge: #A60A0A;
 $blanc: #ffffff;
 
-$rougealt: #C1002B;
-$rougetrois: #DE0123;
 $grisclair: #EFEFEF;
 
-@mixin titre($size, $weight, $style,$margin : 0, $padding : 0, $line-height : normal, $color: $gris) {
-    font-family: "Montserrat", sans-serif;
+$clairpicto: #CCDFD7;
+$foncepicto: #218771;
+$vcb: #CFFFED;
+$blancv: #FBFFFE;
+$vertvibrant: #00D2A4;
+$vertfonce: #004C3C;
+$vtc: #E9FFF7;
+$noirvert: #212423;
+
+@mixin titre($size, $weight, $style,$margin : 0, $padding : 0, $line-height : normal, $color: $noirvert) {
+    font-family: "Nunito", sans-serif;
     font-optical-sizing: auto;
     font-weight: $weight;
     font-style: $style;
@@ -25,13 +31,13 @@ $grisclair: #EFEFEF;
     line-height: $line-height;
 }
   
-@mixin texte($size,$weight,$style, $line-height : 187%) {
-font-family: "Work Sans", sans-serif;
+@mixin texte($size,$weight,$style, $line-height : 130%) {
+font-family: "Nunito", sans-serif;
 font-optical-sizing: auto;
 font-weight: $weight;
 font-style: $style;
 font-size: $size;
-color: $gris;
+color: $noirvert;
 line-height: $line-height;
   }
 

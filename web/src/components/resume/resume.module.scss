@@ -1,0 +1,29 @@
+[data-resume="composant"] {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+    background-color: var.$vtc;
+    width: 100vw;
+    [data-resume="contenu"] {
+        width: 1200px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        background-color: var.$blanc;
+        margin: auto;
+        border-radius: 9px;
+        box-shadow: 0px 2px 14.8px -2px #D6D6D6;
+        [data-resume="texte"] {
+            margin: 1.875rem 2rem 2rem 2rem;
+            h2 {
+                margin-bottom: 2rem;
+            }
+        }
+        img {
+            width: 226px;
+            min-height: 320px;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0 9px 9px 0;
+        }
+    }
+}

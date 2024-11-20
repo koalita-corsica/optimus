@@ -7,35 +7,35 @@ import { unsplashImageAsset } from 'sanity-plugin-asset-source-unsplash'
 import {buildLegacyTheme} from 'sanity'
 
 const props = {
-  '--my-agex': '#d64c4c',
+  '--my-optimus': '#00D2A4',
 }
 
 export const myTheme = buildLegacyTheme({
   /* Base theme colors */
 
   /* Brand */
-  '--brand-primary': props['--my-agex'],
+  '--brand-primary': props['--my-optimus'],
 
   // Default button
-  '--default-button-primary-color': props['--my-agex'],
+  '--default-button-primary-color': props['--my-optimus'],
 
   /* State */
-  '--state-info-color': props['--my-agex'],
+  '--state-info-color': props['--my-optimus'],
 
   /* Navbar */
 
-  '--focus-color': props['--my-agex'],
+  '--focus-color': props['--my-optimus'],
 })
 
-// const Logo = () => (
-//   <img src="/static/logo.png" style={{objectFit:'cover', height:'100%', width: '100%'}} />
-// );
+const Logo = () => (
+  <img src="/static/pictobbl.png" style={{objectFit:'cover', height:'100%', width: '100%'}} />
+);
 
 
 export default defineConfig({
   name: 'default',
-  title: 'Optimus',
-  // icon: Logo,
+  title: 'Optimus FAC',
+  icon: Logo,
   theme: myTheme,
 
   projectId: '01xufuk5',

@@ -1,37 +1,33 @@
 //Documents
-import equipe from './documents/equipe'
-import identite from './documents/identite'
-import missions from './documents/ordering_example'
 import pages from './documents/pages'
-import pros from './documents/pros'
-import particuliers from './documents/particuliers'
-import realisations from './documents/realisations'
+import formations from './documents/formations'
+import menu from './documents/menu'
+import thematiques from './documents/thematiques'
 
 // Objets
 import RichTextEditor from './objects/RichTextEditor'
 import RichTextSans from './objects/RichTextSans'
-import combi from './objects/combi'
 import galerieimg from './objects/galerie'
-import galerieCombi from './objects/galerieCombi'
-import quinconce from './objects/quinconce'
-import une from './objects/une'
+import blocinfos from './objects/blocinfos'
+import metadatas from './objects/metadatas'
+import jm from './objects/jm'
+import intermediaire from './objects/intermediaire'
+import resume from './objects/resume'
 
 export const schemaTypes = [
     // Documents
+    menu,
     pages,
-    equipe,
-    missions,
-    identite,
-    pros,
-    particuliers,
-    realisations,
+    formations,
+    thematiques,
 
     // obj
     RichTextEditor,
     RichTextSans,
     galerieimg,
-    une,
-    combi,
-    quinconce,
-    galerieCombi,
+    blocinfos,
+    metadatas,
+    jm,
+    intermediaire,
+    resume
 ]

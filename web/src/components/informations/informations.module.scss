@@ -1,0 +1,33 @@
+[data-informations="composant"] {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    background-color: var.$vtc;
+    width: 100vw;
+    [data-informations="contenu"] {
+        width: 1200px;
+        margin: auto;
+        [data-informations="display"] {
+            border-bottom: solid 1px var.$clairpicto;
+            margin-top: 1.5rem;
+            ul {
+                display: flex;
+                flex-direction: row;
+                list-style: none;
+                padding: 0;
+                justify-content: space-around;
+                li {
+                    padding: 0;
+                    margin: 0;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    line-height: 1;
+                    gap: 0.5rem;
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+}

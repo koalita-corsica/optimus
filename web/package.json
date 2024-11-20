@@ -8,8 +8,8 @@
     "@phosphor-icons/react": "^2.1.7",
     "@portabletext/react": "^3.1.0",
     "@react-icons/all-files": "^4.1.0",
-    "firebase": "^10.14.0",
-    "firebase-tools": "^13.20.2",
+    "firebase": "^11.0.1",
+    "firebase-tools": "^13.23.0",
     "gatsby": "^5.13.7",
     "gatsby-plugin-image": "^3.12.3",
     "gatsby-plugin-manifest": "^5.12.0",
@@ -23,7 +23,7 @@
     "normalize.css": "^8.0.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "sass": "^1.79.4"
+    "sass": "^1.80.4"
   },
   "devDependencies": {
     "prettier": "^3.3.3"

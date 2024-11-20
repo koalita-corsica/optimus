@@ -15,6 +15,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["**/*.ts", "**/*.tsx", "schemas/documents/pages.ts", "schemas/documents/pages.jsx", "schemas/documents/pros.jsx", "schemas/objects/quinconce.jsx"],
+  "include": ["**/*.ts", "**/*.tsx", "schemas/documents/pages.ts", "schemas/documents/pages.jsx", "schemas/documents/pros.jsx", "schemas/objects/quinconce.jsx", "schemas/objects/metadatas.jsx", "schemas/objects/jm.js"],
   "exclude": ["node_modules"]
 }

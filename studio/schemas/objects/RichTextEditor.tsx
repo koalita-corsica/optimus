@@ -1,7 +1,7 @@
 // RichTextEditor.js
 import React from 'react'
 import { defineType } from 'sanity'
-import { BsFillGrid1X2Fill } from "@react-icons/all-files/bs/BsFillGrid1X2Fill";
+import {ImagesSquare} from '@phosphor-icons/react'
 
 const underlineIcon = () => (
   <span style={{ fontWeight: 'bold', color: '#00D2A4' }}>_</span>
@@ -10,7 +10,7 @@ const underlineDecorator = (props : any) => (
   <span style={{ borderBottom: ' solid 1px #00D2A4' }}>{props.children}</span>
 )
 const GalerieIcone = () => (
-  <BsFillGrid1X2Fill color="#00D2A4" />
+  <ImagesSquare color="#00D2A4" />
 )
 
 

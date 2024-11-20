@@ -8,28 +8,39 @@
 }
 // Titres par défaut
 h1 {
-    @include var.titre(3rem, 600, normal);
+    @include var.titre(3rem, 900, normal);
   }
 
 h2 {
-  @include var.titre(2.5rem, 500, normal); // 40px / 16px = 2.5rem
+  @include var.titre(2.5rem, 800, normal); // 40px / 16px = 2.5rem
 }
 
 h3 {
-  @include var.titre(2.1875rem, 500, normal); // 35px / 16px = 2.1875rem
+  @include var.titre(2rem, 600, normal); // 35px / 16px = 2.1875rem
 }
 
 h4 {
   @include var.titre(1.5rem, 500, normal); // 24px / 16px = 1.5rem
 }
 
+h5 {
+  @include var.titre(1.25rem, 500, normal); // 20px / 16px = 1.25rem
+}
+
+h6 {
+  @include var.titre(0.75rem, 400, normal); // 12px / 16px = 0.75rem
+}
+
 // Textes par défaut
-p, ul, ol, li, a {
-    @include var.texte(1rem, 400, normal); // 16px / 16px = 1rem
+div, p, ul, ol, li, a {
+    @include var.texte(1.25rem, 300, normal); // 16px / 16px = 1rem
 }
 
 .item {
   @include var.texte(0.75rem, 300, normal); // 12px / 16px = 0.75rem
+}
+.item-bold {
+  @include var.texte(0.75rem, 700, normal); // 12px / 16px = 0.75rem
 }
 
 .cta {
@@ -44,9 +55,6 @@ ol {
     @include var.liste(ol);
 }
 
-[data-underline] {
-  border-bottom:var.$rougetrois solid 3px;
-}
 
 [data-element="trait"] {
   width: 90%;

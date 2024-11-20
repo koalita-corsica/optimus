@@ -8,12 +8,49 @@ export default {
   type: 'document',
   title: 'Pages',
   icon: Picto,
+  fieldsets: [
+    {
+      name: "intro", 
+      title: "Module d'introduction",
+      options: {
+        collapsible: true, 
+        collapsed: true,
+      },
+    },
+    {
+      name: "p1", 
+      title: "Premier paragraphe",
+      options: {
+        collapsible: true, 
+        collapsed: true,
+      },
+      hidden: ({document}) => document?.name === 'Accueil'
+    },
+    {
+      name: "p2", 
+      title: "Second paragraphe",
+      options: {
+        collapsible: true, 
+        collapsed: true,
+      },
+      hidden: ({document}) => document?.name === 'Accueil'
+    },
+    {
+      name: "inter",
+      title: "Page intermédiaire",
+      options: {
+        collapsible: true, 
+        collapsed: true,
+      },
+      hidden: ({document}) => document?.name === 'Accueil'
+    }
+  ],
   fields: [
     {
       name: 'name',
       type: 'string',
       title: 'Nom de la page',
-      description: 'Il ne s\'agit que du nom de la page, il n\'apparait pas sur le site'
+      readOnly: ({document}) => document?.name === 'Accueil'
     },
     {
       title: 'Slug',
@@ -29,25 +66,33 @@ export default {
           .replace(/-+$/, '')
           .slice(0, 200)
           .toLowerCase()
-      }
+      },
+      hidden: ({document}) => document?.name === 'Accueil'
     },
     {
-      name: 'titre',
-      type: 'string',
-      title: 'Titre',
-      description: 'Le titre de la page qui apparait tout en haut',
+      name: 'menu',
+      title: 'Rubrique parente du menu',
+      type: 'reference',
+      to: [{type: 'menu'}],
+      hidden: ({document}) => document?.name === 'Accueil'
+    },
+    {
+      name: 'inter',
+      title: 'Page intermédiaire',
+      type: 'intermediaire',
+      hidden: ({document}) => document?.name === 'Accueil',
+      fieldset: 'inter',
     },
     {
       name: 'intro',
       type: 'richText',
       title: "Introduction",
-      description: "Le paragraphe d\'introduction sous le titre"
+      fieldset: 'intro',
     },
     {
       title: 'Image principale',
       name: 'img',
       type: 'image',
-      description: 'L\'image principale de la page',
       fields: [
         {
           name: 'alt',
@@ -55,95 +100,74 @@ export default {
           title: 'Balise Alt',
         },
       ],
+      fieldset: 'intro'
     },
     {
-      title: 'Titre du bouton de gauche',
-      name: 'buttonun',
+      name: 'tag',
+      title: 'Étiquette',
       type: 'string',
-      hidden: ({ document }) => document?.name !== 'Accueil'
+      description: "Texte de l'étiquette sur l'image",
+      fieldset: 'intro'
     },
     {
-      title: 'Titre du bouton de droite',
-      name: 'buttondeux',
-      type: 'string',
-      hidden: ({ document }) => document?.name !== 'Accueil'
+      name: 'une',
+      title: 'Article à la une',
+      type: 'reference',
+      to: [{type: 'pages'}],
+      hidden: ({document}) => document?.name != 'Accueil'
     },
     {
-      name: 'plus',
       type: 'richText',
-      title: "La phrase \'Pour en savoir plus\'",
-      hidden: ({ document }) => document?.name !== 'Accueil' || document?.name !== 'Nos réalisations'
-  },
-  {
-    name: 'secdeuxtun',
-    type: 'string',
-    title: 'Section 2 : premier titre',
-    description: "La première ligne du titre de la 2eme section de la page",
-    hidden: ({ document }) => document?.name !== 'Accueil'
-  },
-  {
-    name: 'secdeuxtdeux',
-    type: 'string',
-    title: 'Section 2 : second titre',
-    description: "La seconde ligne du titre de la 2eme section de la page",
-    hidden: ({ document }) => document?.name !== 'Accueil'
-  },
-  {
-    title: 'L\'équipe',
-    name: 'equipe',
-    type: 'array',
-    description: 'Choisissez les membres qui seront sur la page d\'accueil',
-    of: [
-      {
-        type: 'reference',
-        title: 'Membres de l\'équipe',
-        to: [
-          {type: 'equipe'},
-        ]
+      name: 'p1',
+      title: "Contenu",
+      fieldset: "p1"
+    },
+    {
+      type: 'richText',
+      name: 'p2',
+      title: "Contenu",
+      fieldset: "p2"
+    },
+    {
+      type: 'richText',
+      name: 'shortdesc',
+      title: "Description courte (article à la une)",
+      hidden: ({document}) => document?.name === 'Accueil',
+    },
+    {
+      title: 'Bloc d\'informations',
+      name: 'informations',
+      type: 'blocinfos',
+      hidden: ({document}) => document?.name === 'Accueil',
+      options: {
+        collapsible: true, 
+        collapsed: true, 
       }
-    ],
-    hidden: ({ document }) => document?.name !== 'Accueil'
-  },
-  {
-    title: 'L\'identité de marque',
-    name: 'idmarque',
-    type: 'array',
-    description: 'Ajoutez les éléments définissant l\'identité de marque d\'Agex BE',
-    of: [
-      {
-        type: 'reference',
-        title: 'Éléments de l\'identité de marque',
-        to: [
-          {type: 'identite'},
-        ]
+    },
+    {
+      title: 'En résumé',
+      name: 'enresume',
+      type: 'resume',
+      options: {
+        collapsible: true, 
+        collapsed: true, 
       }
-    ],
-    hidden: ({ document }) => document?.name !== 'Accueil'
+    },
+  ],  
+  preview: {
+    select: {
+      title: 'name',
+      subtitle: 'menu.name',
+      hasparent: 'inter.pageinter',
+      parentname: 'inter.pageparente.name'
+    },
+    prepare(selection) {
+      const {title, subtitle, hasparent, parentname} = selection
+      const sub = hasparent ? subtitle : subtitle + " > " + parentname + " > ⤴️"
+      return {
+        title,
+        subtitle: title === "Accueil" ? "La plus belle page d'accueil de la galaxie" : sub
+      }
   },
-  {
-    title: 'Téléphone',
-    name: 'tel',
-    type: 'string',
-    hidden: ({ document }) => document?.name !== 'Contact'
-  },
-  {
-    title: 'Adresse Mail',
-    name: 'mail',
-    type: 'string',
-    hidden: ({ document }) => document?.name !== 'Contact'
-  },
-  {
-    title: 'Image de fond',
-    name: 'imgfond',
-    type: 'image',
-    fields: [
-      {
-        name: 'alt',
-        type: 'string',
-        title: 'Balise Alt',
-      },
-    ],
-    hidden: ({ document }) => document?.name !== 'Contact'
-  },
-  ],
+  }, 
 }    

@@ -1,13 +1,31 @@
-import { Browser } from '@phosphor-icons/react'
+import { Cards } from '@phosphor-icons/react'
 
 const Picto = () => (
-  <Browser weight='duotone' />
+  <Cards weight='duotone' />
 )
 export default {
   name: 'formations',
   type: 'document',
   title: 'Formations',
   icon: Picto,
+  fieldsets: [
+    {
+      name: 'intro', 
+      title: 'Bloc d\'introduction',
+      options: {
+        collapsible: true, 
+        collapsed: true,
+      }
+    },
+    {
+      name: "metadata", 
+      title: "Informations générales",
+      options: {
+        collapsible: true, 
+        collapsed: true,
+      },
+    },
+  ],
   fields: [
     {
       name: 'name',
@@ -31,6 +49,13 @@ export default {
       }
     },
     {
+      name: 'intro',
+      type: 'richText',
+      title: "Introduction",
+      description: "Le paragraphe d\'introduction sous le titre",
+      fieldset: 'intro'
+    },
+    {
       title: 'Image principale',
       name: 'img',
       type: 'image',
@@ -42,17 +67,41 @@ export default {
           title: 'Balise Alt',
         },
       ],
+      fieldset: 'intro'
     },
     {
-      name: 'description',
-      type: 'richTextSans',
-      title: "Description",
-      description: "Le paragraphe d\'introduction sous le titre"
+      name: 'tag',
+      title: 'Étiquette',
+      type: 'string',
+      description: "Texte de l'étiquette sur l'image",
+      fieldset: 'intro'
     },
     {
-        title: 'Bloc d\informations',
+      title: 'Brochure',
+      name: 'brochure',
+      type: 'file',
+      options: {
+        collapsible: true, 
+        collapsed: true, 
+      }
+    },
+    {
+        title: 'Bloc d\'informations',
         name: 'informations',
-        type: 'blocinfos'
-    }
+        type: 'blocinfos',
+        options: {
+          collapsible: true, 
+          collapsed: true, 
+        }
+    },
+    {
+      title: 'Données de filtres',
+      name: 'metadatas',
+      type: 'metadatas',
+      options: {
+        collapsible: true, 
+        collapsed: true, 
+      }
+  }
   ],
 }    

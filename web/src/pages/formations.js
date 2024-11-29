@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { graphql, Link } from "gatsby"
 import Layout from "../components/layout/layout"
 import Seo from "../components/seo/seo"
@@ -47,58 +47,93 @@ export const pageQuery = graphql`
     const [formationsFiltres, setFormationsFiltres] = useState(allFormations)
     console.log("formations", [allFormations, allThematiques])
 
-    const [themes, setThemes] = useState({
-      alternance: false,
-      tempsPlein: false,
-      distanciel: false,
-      presentiel: false,
-      formationCourte: false
-    });
-  
+    const [themes, setThemes] = useState({})
+    const [rythmelieu, setRythmelieu] = useState({})
+    useEffect(() => {
+      // thèmes
+      const newThemes = allThematiques.reduce((acc, theme) => {
+        acc[theme.titre] = true;
+        return acc;
+      }, {})
+      
+      // Rythme & lieux
+      const allRythmelieu = [...new Set(allFormations.map((item) => item.metadatas.rythmelieu).flat())]
+      const rythmelieuObject = Object.fromEntries(allRythmelieu.map((value) => [value, true]));
+
+      setRythmelieu(rythmelieuObject);
+      setThemes(newThemes)
+    }, [allThematiques, allFormations]);
+
     const [levels, setLevels] = useState({
       qualifiante: true,
-      niveau3: false,
-      niveau4: false,
-      niveau6: false,
-      niveau5: false,
-      niveau7: false
+      niveau3: true,
+      niveau4: true,
+      niveau6: true,
+      niveau5: true,
+      niveau7: true
     });
   
-    const [modalities, setModalities] = useState({
-      interEntreprises: false,
-      intraEntreprise: false,
-      cpf: false
-    });
-  
-    // Fonction pour gérer le clic sur une case à cocher
+
+    const filtrage = () => {
+      const cards = document.querySelectorAll('[data-card]');
+      console.log("cards", cards)
+      cards.forEach(card => {
+        const formationName = card.querySelector('h5').textContent;
+        const formation = allFormations.find(f => f.name === formationName);
+        if (!formation) return;
+        
+        const thematiquesMatch = Object.entries(themes).some(
+          ([key, value]) => value && formation.metadatas.thematiques.some(t => t.titre === key)
+        );
+        
+        const rythmelieuMatch = Object.entries(rythmelieu).some(
+          ([key, value]) => value && formation.metadatas.rythmelieu.includes(key)
+        );
+        
+        const niveauMatch = Object.entries(levels).some(
+          ([key, value]) => value && key === formation.metadatas.niveau
+        );
+        
+        const isFiltered = thematiquesMatch && rythmelieuMatch && niveauMatch;
+        console.log("niveauuuu", [formation.metadatas.niveau, Object.entries(levels)])
+        console.log("is it tho?", [thematiquesMatch,rythmelieuMatch, niveauMatch, isFiltered])
+        card.dataset.isfiltered = isFiltered;
+      });
+    };
+    
     const handleCheckboxChange = (group, option) => {
       switch (group) {
         case 'themes':
-          setThemes(prev => ({ ...prev, [option]: !prev[option] }));
-          let th = themes
-          console.log("he", th[option])
-          th[option] && console.log("he", th[option])
+          setThemes(prev => {
+            const updatedThemes = { ...prev, [option]: !prev[option] };
+            return updatedThemes;
+          });
           break;
+    
+        case 'rythmelieu':
+          setRythmelieu(prev => {
+            const updatedRythmelieu = { ...prev, [option]: !prev[option] };
+            return updatedRythmelieu;
+          });
+          break;
+    
         case 'levels':
-          setLevels(prev => ({ ...prev, [option]: !prev[option] }));
+          setLevels(prev => {
+            const updatedLevels = { ...prev, [option]: !prev[option] };
+            return updatedLevels;
+          });
           break;
-        case 'modalities':
-          setModalities(prev => ({ ...prev, [option]: !prev[option] }));
-          break;
+    
         default:
           break;
       }
+    
+      // Appel de la fonction de filtrage après mise à jour des états
+      setTimeout(filtrage, 0);
     };
   
     // Fonction pour réinitialiser tous les filtres
     const resetFilters = () => {
-      setThemes({
-        alternance: true,
-        tempsPlein: true,
-        distanciel: true,
-        presentiel: true,
-        formationCourte: true
-      });
       setLevels({
         qualifiante: true,
         niveau3: true,
@@ -106,11 +141,6 @@ export const pageQuery = graphql`
         niveau6: true,
         niveau5: true,
         niveau7: true
-      });
-      setModalities({
-        interEntreprises: true,
-        intraEntreprise: true,
-        cpf: true
       });
     };
 
@@ -154,23 +184,23 @@ export const pageQuery = graphql`
             <div data-aside="filter-section">
                 <h4>Thématiques</h4>
                 <div data-aside="tags">
-                    {allThematiques.map((th) => 
-                    <button data-aside="tag">{th.titre}</button>
-                    )}
+                    {Object.entries(themes).map(([key, value]) => (
+                      <button data-aside="tag" key={key} data-label={value} onClick={() => handleCheckboxChange('themes', key)}>{key}</button>
+                    ))}
                 </div>
             </div>
 
             <div data-aside="filter-section">
                 <h4>Rythme & lieu</h4>
                 <div data-aside="checkbox-group">
-                {Object.entries(themes).map(([key, value]) => (
-                    <label key={key} onClick={() => handleCheckboxChange('themes', key)} data-aside="checkbox-label">
+                {Object.entries(rythmelieu).map(([key, value]) => (
+                    <label key={key} onClick={() => handleCheckboxChange('rythmelieu', key)} data-aside="checkbox-label">
                     {value ? (
                         <CheckSquareOffset size={32} color="#004C3C" weight="duotone" />
                     ) : (
                         <Square size={32} color="#004C3C"  />
                     )}
-                    <span>{key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1')}</span>
+                    <span>{(key === "tpsplein" ? "Temps Plein" : (key === "courte" ? "Formation courte" : key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1')))}</span>
                     </label>
                 ))}
                 </div>
@@ -201,26 +231,10 @@ export const pageQuery = graphql`
                 ))}
                 </div>
             </div>
-
-            <div data-aside="filter-section">
-                <h4>Modalités</h4>
-                <div data-aside="checkbox-group">
-                {Object.entries(modalities).map(([key, value]) => (
-                    <label key={key} onClick={() => handleCheckboxChange('modalities', key)} data-aside="checkbox-label">
-                    {value ? (
-                        <CheckSquareOffset size={32} color="#004C3C" weight="duotone" />
-                    ) : (
-                        <Square size={32} color="#004C3C"  />
-                    )}
-                    <span>{key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1')}</span>
-                    </label>
-                ))}
-                </div>
-            </div>
             </aside>
             <div data-mainresults>
                 {formationsFiltres.map((formation) => 
-                    <div data-card>
+                    <div data-card data-isfiltered="false">
                         <h5>{formation.name}</h5>
                         <button>{formation.metadatas.thematiques[0].titre}</button>
                         <PortableText value={formation.metadatas._rawDesc} components={components} />
@@ -244,4 +258,3 @@ export const pageQuery = graphql`
 export const Head = () => <Seo title="Accueil" />
 
 export default FormationsPage
-

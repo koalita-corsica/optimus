@@ -399,6 +399,12 @@ main {
                             border: solid 1px var.$vertfonce;
                             border-radius: 5px;
                         }
+                        [data-label="false"] {
+                            background-color: var.$blanc;
+                        }
+                        [data-label="true"] {
+                            background-color: var.$vcb;
+                        }
                     }
                     [data-aside="filter-section"] {
                         display: flex;
@@ -419,15 +425,20 @@ main {
                     flex-direction: row;
                     flex-wrap: wrap;
                     gap: 2rem;
+                    [data-isfiltered="true"] {
+                        display: none;
+                    }
+                    [data-isfiltered="false"] {
+                        display: flex;
+                    }
                     [data-card] {
+                        flex-direction: column;
                         height: 23.75rem;
                         width: 17rem;
                         border-radius: 9px;
                         background: var.$blancv;
                         box-shadow: 0px 2px 14.8px -2px #D6D6D6;
                         position: relative;
-                        display: flex;
-                        flex-direction: column;
                         margin-bottom: 2rem;
                         h5 {
                             padding: 0.5rem;

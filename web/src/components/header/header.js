@@ -8,7 +8,7 @@ import Arrow from '../../images/elements/fleche.svg'
 const Header = () => {
   const data = useStaticQuery(graphql`
     query HeaderQuery {
-      allSanityMenu {
+      allSanityMenu(sort: {ordre: ASC}) {
         nodes {
           name
           slug {

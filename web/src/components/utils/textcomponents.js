@@ -1,5 +1,5 @@
 import * as React from "react"
-
+import {Icon} from '@iconify/react'
 
 const components = {
     marks: {
@@ -34,6 +34,20 @@ const components = {
             })}
           </div>
 
+        )
+      },
+      'icon.manager': ({value}) => {
+        console.log("hello", value)
+        const {icon, metadata: {flip, rotate, size, color} } = value
+        return (
+          <Icon
+            icon={icon}
+            flip={flip}
+            rotate={rotate}
+            width={size.width}
+            height={size.height}
+            style={{color: color.hex}}
+          />
         )
       }
     }

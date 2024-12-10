@@ -17,7 +17,7 @@ export const pageQuery = graphql`
     index: sanityPages(name: {eq: "Accueil"}) {
     name
     _rawImg(resolveReferences: {maxDepth: 10})
-    _rawIntro(resolveReferences: {maxDepth: 10})
+    _rawIntro(resolveReferences: {maxDepth: 20})
     _rawUne(resolveReferences: {maxDepth: 10})
   }
 }
@@ -27,6 +27,7 @@ export const pageQuery = graphql`
   const IndexPage = (data) => {
 
     const index = data.data.index
+    console.log(index)
     return (
       <Layout>
         <main data-page="accueil">

@@ -1,16 +1,24 @@
 import {DotsThree} from '@phosphor-icons/react'
 
+const Picto = () => (
+  <DotsThree weight='duotone' />
+)
 
 export default {
   name: 'menu',
   title: 'Menu',
   type: 'document',
-  icon: DotsThree,
+  icon: Picto,
   fields: [
     {
       name: 'name',
       type: 'string',
       title: 'Nom de l\'item du menu',
+    },
+    {
+      name: 'ordre',
+      type: 'string',
+      title: 'Ordre d\'affichage',
     },
     {
       name: 'image',
@@ -60,14 +68,24 @@ export default {
     select: {
       title: 'name',
       items: 'subitems',
+      ordre: 'ordre',
     },
     prepare(selection : any) {
-      const {title, items} = selection
+      const {title, items, ordre} = selection
       const hasitems = items.length > 0 ? "Menu avec " + items.length + " élément" + (items.length > 1 ? "s" : "") : "Pas d'éléments de sous-menu"
       return {
-        title,
+        title: ordre + ". " + title,
         subtitle: hasitems
       }
   },
   },
+  orderings: [
+    {
+      title: 'Ordre croissant',
+      name: 'ordrecroissant',
+      by: [
+        {field: 'ordre', direction: 'asc'}
+      ]
+    },
+  ]
 }

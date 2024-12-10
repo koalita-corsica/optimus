@@ -1,4 +1,4 @@
-import {VscGroupByRefType} from '@react-icons/all-files/vsc/VscGroupByRefType'
+import {ListBullets} from '@phosphor-icons/react'
 
 // Render a div that wraps the default preview component
 function MyPreviewComponent(props: any) {
@@ -9,11 +9,15 @@ function MyPreviewComponent(props: any) {
   )
 }
 
+const Picto = () => (
+  <ListBullets weight='duotone' />
+)
+
 export default {
     name: 'thematiques',
     type: 'document',
     title: 'Thématiques des formations',
-    icon: VscGroupByRefType,
+    icon: Picto,
     components: {
       preview: MyPreviewComponent, // Add custom preview component
     },

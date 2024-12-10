@@ -36,6 +36,17 @@ export const pageQuery = graphql`
         titre
         }
     }
+    durees: allSanityFormations {
+        nodes {
+            metadatas {
+                jm {
+                  jours
+                  mois
+                }
+                heures
+            }
+        }
+    }
 }
 `
 
@@ -44,11 +55,14 @@ export const pageQuery = graphql`
 
     const allFormations = data.data.formations.nodes
     const allThematiques = data.data.thematiques.nodes
+    const allDurations = data.data.durees.nodes
     const [formationsFiltres, setFormationsFiltres] = useState(allFormations)
-    console.log("formations", [allFormations, allThematiques])
+    console.log("formations", allFormations)
 
     const [themes, setThemes] = useState({})
     const [rythmelieu, setRythmelieu] = useState({})
+    const [duration, setDuration] = useState([])
+
     useEffect(() => {
       // thèmes
       const newThemes = allThematiques.reduce((acc, theme) => {
@@ -62,85 +76,104 @@ export const pageQuery = graphql`
 
       setRythmelieu(rythmelieuObject);
       setThemes(newThemes)
-    }, [allThematiques, allFormations]);
+
+      // Durées
+      const processDurations = () => {
+        const sortedDurations = allDurations
+          .map((item) => {
+            const jm = item.metadatas.jm || {}; // Récupère jm ou un objet vide s'il est null
+            const { mois, jours } = jm; // Extraire mois et jours si jm existe
+            const heures = item.metadatas.heures;
+    
+            // Normaliser les valeurs pour éviter les négatifs et prioriser : mois > jours > heures > "Durée à définir"
+            if (mois !== null && mois !== undefined) return { label: `${Math.abs(mois)} mois`, value: Math.abs(mois) * 30 * 24 };
+            if (jours !== null && jours !== undefined) return { label: `${Math.abs(jours)} jours`, value: Math.abs(jours) * 24 };
+            if (heures !== null && heures !== undefined) return { label: `${Math.abs(heures)} heures`, value: Math.abs(heures) };
+            return { label: "Durée à définir", value: Infinity }; // Cas où tout est null
+          })
+          .sort((a, b) => a.value - b.value) // Trier les durées par leur valeur
+          .map((item) => item.label); // Extraire uniquement les labels
+    
+        setDuration([...new Set(sortedDurations)]); // Supprimer les doublons et mettre à jour l'état
+      };
+    
+      processDurations();
+    }, [allThematiques, allFormations, allDurations]);
 
     const [levels, setLevels] = useState({
-      qualifiante: true,
-      niveau3: true,
-      niveau4: true,
-      niveau6: true,
-      niveau5: true,
-      niveau7: true
+      qualif: true,
+      nv3: true,
+      nv4: true,
+      nv5: true,
+      nv6: true,
+      nv7: true
     });
   
 
-    const filtrage = () => {
+    const filtrage = (updatedThemes, updatedRythmelieu, updatedLevels) => {
       const cards = document.querySelectorAll('[data-card]');
-      console.log("cards", cards)
       cards.forEach(card => {
         const formationName = card.querySelector('h5').textContent;
         const formation = allFormations.find(f => f.name === formationName);
         if (!formation) return;
-        
-        const thematiquesMatch = Object.entries(themes).some(
+    
+        const thematiquesMatch = Object.entries(updatedThemes).some(
           ([key, value]) => value && formation.metadatas.thematiques.some(t => t.titre === key)
         );
-        
-        const rythmelieuMatch = Object.entries(rythmelieu).some(
+    
+        const rythmelieuMatch = Object.entries(updatedRythmelieu).some(
           ([key, value]) => value && formation.metadatas.rythmelieu.includes(key)
         );
         
-        const niveauMatch = Object.entries(levels).some(
+        const niveauMatch = Object.entries(updatedLevels).some(
           ([key, value]) => value && key === formation.metadatas.niveau
         );
-        
-        const isFiltered = thematiquesMatch && rythmelieuMatch && niveauMatch;
-        console.log("niveauuuu", [formation.metadatas.niveau, Object.entries(levels)])
-        console.log("is it tho?", [thematiquesMatch,rythmelieuMatch, niveauMatch, isFiltered])
-        card.dataset.isfiltered = isFiltered;
+    
+        const isMatching = thematiquesMatch && rythmelieuMatch && niveauMatch;
+    
+        card.dataset.ismatching = isMatching;
       });
     };
     
     const handleCheckboxChange = (group, option) => {
+      let updatedThemes = themes;
+      let updatedRythmelieu = rythmelieu;
+      let updatedLevels = levels;
+    
       switch (group) {
         case 'themes':
-          setThemes(prev => {
-            const updatedThemes = { ...prev, [option]: !prev[option] };
-            return updatedThemes;
-          });
+          updatedThemes = { ...themes, [option]: !themes[option] };
+          setThemes(updatedThemes);
           break;
     
         case 'rythmelieu':
-          setRythmelieu(prev => {
-            const updatedRythmelieu = { ...prev, [option]: !prev[option] };
-            return updatedRythmelieu;
-          });
+          updatedRythmelieu = { ...rythmelieu, [option]: !rythmelieu[option] };
+          setRythmelieu(updatedRythmelieu);
           break;
     
         case 'levels':
-          setLevels(prev => {
-            const updatedLevels = { ...prev, [option]: !prev[option] };
-            return updatedLevels;
-          });
+          updatedLevels = { ...levels, [option]: !levels[option] };
+          setLevels(updatedLevels);
           break;
     
         default:
           break;
       }
     
-      // Appel de la fonction de filtrage après mise à jour des états
-      setTimeout(filtrage, 0);
+      // Appel de la fonction filtrage avec les valeurs locales mises à jour
+      filtrage(updatedThemes, updatedRythmelieu, updatedLevels);
     };
+    
   
     // Fonction pour réinitialiser tous les filtres
     const resetFilters = () => {
       setLevels({
-        qualifiante: true,
-        niveau3: true,
-        niveau4: true,
-        niveau6: true,
-        niveau5: true,
-        niveau7: true
+        qualif: true,
+        nv3: true,
+        nv4: true,
+        nv5: true,
+        nv6: true,
+        nv7: true
       });
     };
 
@@ -148,27 +181,39 @@ export const pageQuery = graphql`
       switch (nom) {
         case 'qualif':
           return "Formation qualifiante"
-        case 'nv1':
-          return "Diplôme de niveau 1"
-        case 'nv2':
-          return "Diplôme de niveau 2"
         case 'nv3':
+        case 'niveau3':
           return "Diplôme de niveau 3"
         case 'nv4':
+        case 'niveau4':
           return "Diplôme de niveau 4"
         case 'nv5':
+        case 'niveau5':
           return "Diplôme de niveau 5"
         case 'nv6':
-          return "Diplôme de niveau 5"
+        case 'niveau6':
+          return "Diplôme de niveau 6"
         case 'nv7':
+        case 'niveau7':
           return "Diplôme de niveau 7"
         case null: 
-          return "Niveau de diplôme non précisé"
+          return "Non précisé"
         default:
           return nom
       }
     };
 
+    
+  const correctRythme = (rh) => {
+    if (rh.includes("distanciel") && rh.includes("presentiel")) {
+      return "Présentiel ou Distanciel";
+    } else if (rh.includes("distanciel")) {
+      return "Distanciel uniquement";
+    } else if (rh.includes("presentiel")) {
+      return "Présentiel uniquement";
+    }
+    return "À définir"; 
+  };
     return (
       <Layout>
         <main data-page="formations">
@@ -200,21 +245,34 @@ export const pageQuery = graphql`
                     ) : (
                         <Square size={32} color="#004C3C"  />
                     )}
-                    <span>{(key === "tpsplein" ? "Temps Plein" : (key === "courte" ? "Formation courte" : key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1')))}</span>
+                    <span>{(key === "tpsplein" ? "Temps Plein" : (key === "courte" ? "Formation courte" : (key === "presentiel" ? "Présentiel" : key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1'))))}</span>
                     </label>
                 ))}
                 </div>
             </div>
-
+{/* 
             <div data-aside="filter-section">
                 <h4>Durée</h4>
                 <div data-aside="duration-slider">
-                {/* Remplacez ceci par un composant de slider */}
-                <span>2 jours</span>
-                <div data-aside="slider"></div>
-                <span>6 mois</span>
+                <div data-aside="slider">    
+                <input 
+                  type="range" 
+                  id="temp" 
+                  name="temp" 
+                  list="markers" 
+                  step="1" 
+                  min="0" 
+                  max={duration.length - 1} 
+                />
+                <datalist id="markers">
+                  {duration.map((du, i) => (
+                    <option key={i} value={i} label={du}></option>
+                  ))}
+                </datalist>
+              </div>
+
                 </div>
-            </div>
+            </div> */}
 
             <div data-aside="filter-section">
                 <h4>Niveaux</h4>
@@ -226,7 +284,7 @@ export const pageQuery = graphql`
                     ) : (
                         <Square size={32} color="#004C3C"  />
                     )}
-                    <span>{key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1')}</span>
+                    <span>{correctDiploma(key)}</span>
                     </label>
                 ))}
                 </div>
@@ -234,17 +292,39 @@ export const pageQuery = graphql`
             </aside>
             <div data-mainresults>
                 {formationsFiltres.map((formation) => 
-                    <div data-card data-isfiltered="false">
-                        <h5>{formation.name}</h5>
-                        <button>{formation.metadatas.thematiques[0].titre}</button>
-                        <PortableText value={formation.metadatas._rawDesc} components={components} />
-                        <div data-modalites>
-                            <Handshake weight="duotone" data-icone />Présentiel ou à distance
-                        </div>
-                        <div data-duree><CalendarSlash weight="duotone" data-icone />24h soit 3 jours</div>
-                        <div data-diplome><Certificate weight="duotone" data-icone />{correctDiploma(formation.metadatas.niveau)}</div>
-                        <Link to={"../" + formation.slug.current}>En savoir plus <ArrowCircleRight size={32} /></Link>
-                    </div>
+                    {
+                      const duree = (infos) => {
+                        let heures = infos.metadatas.heures || false
+                        let jours = infos.metadatas.jm?.jours || false
+                        let mois = infos.metadatas.jm?.mois || false
+                        
+                        if (mois && heures) {
+                          return mois + " mois soit " + heures + " heures"
+                        }
+                        else if (jours && heures) {
+                          return jours + " jours soit " + heures + " heures"
+                        }
+                        else if (heures) {
+                          return heures + " heures"
+                        }
+                        else {
+                          return "Durée adaptable à vos besoins"
+                        }
+                      }
+                      let duration = duree(formation)
+                      return (
+                        <div data-card data-ismatching="true" key={formation.slug.current}>
+                          <h5>{formation.name}</h5>
+                          <button>{formation.metadatas.thematiques[0].titre}</button>
+                          <PortableText value={formation.metadatas._rawDesc} components={components} />
+                          <div data-modalites>
+                              <Handshake weight="duotone" data-icone />{correctRythme(formation.metadatas.rythmelieu)}
+                          </div>
+                          <div data-duree><CalendarSlash weight="duotone" data-icone />{duration}</div>
+                          <div data-diplome><Certificate weight="duotone" data-icone />{correctDiploma(formation.metadatas.niveau)}</div>
+                          <Link to={"../" + formation.slug.current}>En savoir plus <ArrowCircleRight size={32} /></Link>
+                      </div>
+                    )}
                 )}
             </div>
           </section>

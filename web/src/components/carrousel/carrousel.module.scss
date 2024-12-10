@@ -77,14 +77,28 @@
                 background-color: var.$blanc;
                 border-radius: 9px;
                 padding: 2rem;
+                p {
+                    &:first-child {
+                        margin-top: 0;
+                    }
+                }
                 [data-mininav] {
                     ul {
                         display: flex;
                         flex-direction: row;
                         list-style: none;
+                        padding: 0;
+                        justify-content: space-between;
                         li {
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
                             a {
                                 text-decoration: none;
+                                display: flex;
+                                flex-direction: row;
+                                align-items: center;
+                                line-height: 1;
                             }
                         }
                     }
@@ -114,8 +128,10 @@
         max-width: 81.25rem;
         display: flex;
         flex-direction: row;
-        justify-content: center;
+        justify-content: start;
         padding-bottom:6rem ;
+        margin: auto;
+        padding-left: 1rem;
         section {
             border-radius: 9px;
             background-color: var.$blanc;

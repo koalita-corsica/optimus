@@ -62,10 +62,10 @@ export default defineType({
         of: [{type: 'string'}],
         options: {
           list: [
+            {title: 'Présentiel', value: 'presentiel'},
+            {title: 'Distanciel', value: 'distanciel'},
             {title: 'Temps plein', value: 'tpsplein'},
             {title: 'Alternance', value: 'alternance'},
-            {title: 'Distanciel', value: 'distanciel'},
-            {title: 'Présentiel', value: 'presentiel'},
             {title: 'Formation courte', value: 'courte'}
           ]
         }

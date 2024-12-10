@@ -8,7 +8,7 @@
  * @type {import('gatsby').GatsbyConfig}
  */
 
-const siteUrl = process.env.URL || `https://agexbe.com`
+const siteUrl = process.env.URL || `https://optimus-fac.com`
 
 module.exports = {
   siteMetadata: {

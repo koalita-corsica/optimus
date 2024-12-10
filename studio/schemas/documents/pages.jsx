@@ -159,14 +159,24 @@ export default {
       title: 'name',
       subtitle: 'menu.name',
       hasparent: 'inter.pageinter',
-      parentname: 'inter.pageparente.name'
+      parentname: 'inter.pageparente.name',
+      media: 'img'
     },
     prepare(selection) {
-      const {title, subtitle, hasparent, parentname} = selection
+      const {title, subtitle, hasparent, parentname, media} = selection
       const sub = hasparent ? subtitle : subtitle + " > " + parentname + " > ⤴️"
       return {
         title,
-        subtitle: title === "Accueil" ? "La plus belle page d'accueil de la galaxie" : sub
+        subtitle: 
+          title === "Accueil" 
+            ? "La plus belle page d'accueil de la galaxie" 
+            : title === "Découvrir Optimus"
+              ? "La page 'À propos'"
+              : title === "Mentions légales"
+                ? "Page de contenu obligatoire"
+                : sub,
+
+        media: selection.media
       }
   },
   }, 

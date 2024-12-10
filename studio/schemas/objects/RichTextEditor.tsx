@@ -22,6 +22,7 @@ export default defineType({
   of: [
     {
       type: 'block',
+      of: [{type: 'icon.manager', title: 'Icône'}],
       marks: {
         decorators: [
           { title: 'Gras', value: 'strong' },
@@ -37,12 +38,12 @@ export default defineType({
       lists: [
         {title: 'Liste à puce', value: 'bullet'},
         {title: 'Liste ordonnée', value: 'number'}
-      ], 
+      ],
     },
     { 
       title: 'Galerie d\'images',
       type: 'galerieimg',
       icon: GalerieIcone,
-    }
+    },
   ]
 })

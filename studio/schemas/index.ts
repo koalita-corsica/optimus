@@ -17,7 +17,7 @@ import resume from './objects/resume'
 export const schemaTypes = [
     // Documents
     menu,
-    pages,
+     pages,
     formations,
     thematiques,
 
@@ -29,5 +29,5 @@ export const schemaTypes = [
     metadatas,
     jm,
     intermediaire,
-    resume
+    resume,
 ]

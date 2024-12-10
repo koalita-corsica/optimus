@@ -5,14 +5,14 @@ import Fleche from "../../images/elements/fl2.svg"
 import FlecheBas from "../../images/elements/flcb.png"
 import { PortableText } from "@portabletext/react"
 import { components } from "../utils/textcomponents"
-import { ChatsCircle } from "@phosphor-icons/react"
+import { ChatsCircle, GraduationCap, Student, Exam, Info, Swap, BookOpen, Building, SquaresFour, MagnifyingGlass, Monitor, Clipboard } from "@phosphor-icons/react"
 import Img from "../../images/imageportrait.png"
 
 const Carrousel = ({ children }) => {
 
     const carr = useStaticQuery(graphql`
         query Carrousel {
-            allSanityMenu {
+            allSanityMenu(sort: {ordre: ASC}) {
                 nodes {
                     name
                     slug {
@@ -57,6 +57,20 @@ const Carrousel = ({ children }) => {
         );
       };
 
+      const iconMapping = {
+        "Manager d'Unité Marchande (MUM)": { Icon: GraduationCap, label: "MUM" },
+        "Assistant Manager d'Unité Marchande (MUM)": { Icon: Student, label: "AMUM" },
+        "Employé Commercial (EC)": { Icon: Exam, label: "EC" },
+        "Plus d'informations": { Icon: Info, label: "Plus d'infos" },
+        "Nos formations en alternance": { Icon: Swap, label: "Alternance" },
+        "Informations aux étudiants": { Icon: BookOpen, label: "Étudiants" },
+        "Informations aux entreprises": { Icon: Building, label: "Entreprises" },
+        "Nos pôles de formations": { Icon: SquaresFour, label: "Nos pôles" },
+        "Trouver une formation": { Icon: MagnifyingGlass, label: "Recherche" },
+        "Voir les formations à distance": { Icon: Monitor, label: "Distanciel" },
+        "Bilan de compétences": { Icon: Clipboard, label: "Bilan" },
+    };
+
   return (
     <section data-carrousel="composant">
         <div data-carrousel="navigation">
@@ -79,9 +93,21 @@ const Carrousel = ({ children }) => {
                         <PortableText components={components} value={carou._rawTexte} />
                         <nav data-mininav>
                             <ul>
-                                {carou.subitems.map((item, i) => 
-                                    <li className="item" key={item.slug.current + item.name + i * 2203}><Link to={item.slug.current}>{item.name}</Link></li>
-                                )}
+                                {carou.subitems.map((item, i) => { 
+                                    const mappedItem = iconMapping[item.name];
+                                    const { Icon, label } = mappedItem;
+                                    console.log(mappedItem)
+                                    return (
+                                        <li className="item" key={item.slug.current + label + i}>
+                                            <Link to={item.slug.current}>
+                                                {Icon && <Icon size={24} weight="bold" style={{ marginRight: '8px' }} />}
+                                                {label}
+                                            </Link>
+                                        </li>
+                                    )
+
+
+                                })}
                             </ul>
                         </nav>
                     </div>

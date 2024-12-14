@@ -1,12 +1,12 @@
-import { Browser } from '@phosphor-icons/react'
+import { FileText } from '@phosphor-icons/react'
 
 const Picto = () => (
-  <Browser weight='duotone' />
+  <FileText weight='duotone' />
 )
 export default {
-  name: 'pages',
+  name: 'contenu',
   type: 'document',
-  title: 'Pages',
+  title: 'Pages de contenu',
   icon: Picto,
   fieldsets: [
     {
@@ -14,7 +14,7 @@ export default {
       title: "Module d'introduction",
       options: {
         collapsible: true, 
-        collapsed: true,
+        collapsed: false,
       },
     },
     {
@@ -35,15 +35,6 @@ export default {
       },
       hidden: ({document}) => document?.name === 'Accueil'
     },
-    {
-      name: "inter",
-      title: "Page intermédiaire",
-      options: {
-        collapsible: true, 
-        collapsed: true,
-      },
-      hidden: ({document}) => document?.name === 'Accueil'
-    }
   ],
   fields: [
     {
@@ -68,20 +59,6 @@ export default {
           .toLowerCase()
       },
       hidden: ({document}) => document?.name === 'Accueil'
-    },
-    {
-      name: 'menu',
-      title: 'Rubrique parente du menu',
-      type: 'reference',
-      to: [{type: 'menu'}],
-      hidden: ({document}) => document?.name === 'Accueil'
-    },
-    {
-      name: 'inter',
-      title: 'Page intermédiaire',
-      type: 'intermediaire',
-      hidden: ({document}) => document?.name === 'Accueil',
-      fieldset: 'inter',
     },
     {
       name: 'intro',
@@ -120,31 +97,6 @@ export default {
       name: 'p2',
       title: "Contenu",
       fieldset: "p2"
-    },
-    {
-      type: 'richText',
-      name: 'shortdesc',
-      title: "Description courte (article à la une)",
-      hidden: ({document}) => document?.name === 'Accueil',
-    },
-    {
-      title: 'Bloc d\'informations',
-      name: 'informations',
-      type: 'blocinfos',
-      hidden: ({document}) => document?.name === 'Accueil',
-      options: {
-        collapsible: true, 
-        collapsed: true, 
-      }
-    },
-    {
-      title: 'En résumé',
-      name: 'enresume',
-      type: 'resume',
-      options: {
-        collapsible: true, 
-        collapsed: true, 
-      }
     },
   ],  
   preview: {

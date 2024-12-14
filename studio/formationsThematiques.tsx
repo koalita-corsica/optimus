@@ -12,7 +12,7 @@ export default function formthem(
   documentStore: DocumentStore
 ) {
   const filter = `_type == "formations" || _id in path("drafts.**")`
-  const query = `*[${filter}]{ _id, name}`
+  const query = `*[${filter}] | order(lower(name) asc){ _id, name, "imageUrl": img.asset->url}`
   const options = {apiVersion: `2024-12-01`}
 
   const cleanId = (id: string) => id.startsWith('drafts.') ? id.replace('drafts.', '') : id
@@ -27,12 +27,10 @@ export default function formthem(
             .title('Formations & thématiques')
             .menuItems([
               S.menuItem()
-                .title('Add')
-                .intent({type: 'create', params: {type: "formations"}}),
+                .title('Ajouter une nouvelle formation')
+                .intent({ type: 'create', params: { type: 'formations' } })
             ])
             .items([
-              // Create a List Item for Parents
-              // To display all documents that do not have parents
               S.listItem()
                 .title('Thématiques')
                 .schemaType("thematiques")
@@ -46,9 +44,18 @@ export default function formthem(
               S.divider(),
               // Create a List Item for each parent
               // To display all its child documents
-              ...parents.map((parent: SanityDocument, i: number) => 
+              ...parents
+                .filter((parent: SanityDocument) => parent && parent.name)
+                .map((parent: SanityDocument, i: number) => 
                 S.listItem()
-                  .title(parent.name || "Sans titre")
+                  .title((i + 1) + ". " + (parent.name || "Sans titre"))
+                  .icon(() => {
+                    console.log(parent)
+                    if (parent.imageUrl) {
+                      return <img src={parent.imageUrl} style={{ width: '24px', height: '24px', objectFit: 'cover' }} alt="Preview" />;
+                    }
+                    return <span>🖼️</span>; // Emoji or fallback icon
+                  })
                   .child(S.document()
                   .schemaType('formations')
                   .documentId(cleanId(parent._id))

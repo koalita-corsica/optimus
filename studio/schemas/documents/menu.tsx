@@ -46,36 +46,16 @@ export default {
       type: 'richText',
       title: "Texte",
     },
-    {
-      name: 'subitems',
-      title: 'Pages du sous-menu',
-      type: 'array',
-      of: [{ 
-        type: 'reference', 
-        to: [
-          { type: 'pages' },
-          { type: 'formations'}
-        ],      
-      }],
-      options: {
-        insertMenu: {
-          showIcons: false,
-        }
-      }
-    }
   ],
   preview: {
     select: {
       title: 'name',
-      items: 'subitems',
       ordre: 'ordre',
     },
     prepare(selection : any) {
       const {title, items, ordre} = selection
-      const hasitems = items.length > 0 ? "Menu avec " + items.length + " élément" + (items.length > 1 ? "s" : "") : "Pas d'éléments de sous-menu"
       return {
         title: ordre + ". " + title,
-        subtitle: hasitems
       }
   },
   },

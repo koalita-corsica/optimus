@@ -13,13 +13,15 @@ import metadatas from './objects/metadatas'
 import jm from './objects/jm'
 import intermediaire from './objects/intermediaire'
 import resume from './objects/resume'
+import contenu from './documents/contenu'
 
 export const schemaTypes = [
     // Documents
     menu,
-     pages,
+    pages,
     formations,
     thematiques,
+    contenu,
 
     // obj
     RichTextEditor,

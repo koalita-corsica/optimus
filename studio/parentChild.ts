@@ -1,5 +1,3 @@
-// ./src/desk-structure/parentChild.ts
-
 import {DocumentStore} from 'sanity'
 import {SanityDocument} from '@sanity/client'
 import {StructureBuilder} from 'sanity/desk'
@@ -14,6 +12,7 @@ export default function parentChild(
   const filter = `_type == "${schemaType}" && inter.pageinter == true`
   const query = `*[${filter}]{ _id, name, menu-> }`
   const options = {apiVersion: `2023-01-01`}
+  
   return S.listItem()
     .title('Articles')
     .icon(Article)
@@ -22,11 +21,9 @@ export default function parentChild(
         map((parents) =>
           S.list()
             .title('Toutes les catégories')
-            .menuItems([
-            ])
+            .menuItems([])
             .items([
-              // Create a List Item for Parents
-              // To display all documents that do not have parents
+              // List Item for "Détails des catégories"
               S.listItem()
                 .title('Détails des catégories')
                 .schemaType(schemaType)
@@ -35,7 +32,6 @@ export default function parentChild(
                     .schemaType(schemaType)
                     .title('Catégories')
                     .filter(filter)
-                    // Use this list for creating from parents menu
                     .canHandleIntent(
                       (intentName, params) =>
                         intentName === 'create' && params.template === 'pages'
@@ -43,33 +39,32 @@ export default function parentChild(
                     .child((id) => S.document().documentId(id).schemaType(schemaType))
                 ),
               S.divider(),
-              // Create a List Item for each parent
-              // To display all its child documents
-              ...parents.map((parent: SanityDocument) => {
-                console.log("ici", parent) 
-                return (
-                    S.listItem({
-                    id: parent._id,
-                    title: parent.menu.name + " -> " + parent.name,
+              // Dynamically generate a list item for each parent
+              ...parents
+                .filter((parent: SanityDocument) => parent && parent.name && parent.menu && parent.menu.name) // Ensure all necessary fields are defined
+                .map((parent: SanityDocument, i: number) => {
+                  console.log("Parent:", parent); // Debugging log
+                  return S.listItem({
+                    id: `${parent._id}`,
+                    title: `${i + 1} | ${parent.name} (${parent.menu.name})`,
                     icon: Tag,
                     schemaType,
                     child: (michel) =>
-                        S.documentTypeList(schemaType)
+                      S.documentTypeList(schemaType)
                         .title(parent.name)
                         .filter(`_type == "pages" && inter.pageparente._ref == $michel`)
-                        .params({schemaType, parentId: parent._id, michel})
-                        // Use this list for creating from child menu
+                        .params({ schemaType, parentId: parent._id, michel })
                         .canHandleIntent(
-                            (intentName, params) =>
+                          (intentName, params) =>
                             intentName === 'create' && params.template === 'ledooda'
                         )
                         .initialValueTemplates([
-                            S.initialValueTemplateItem('ledooda', {
+                          S.initialValueTemplateItem('ledooda', {
                             parentId: parent._id,
-                            }),
+                          }),
                         ]),
-                    }))
-              }),
+                  });
+                }),
             ])
         )
       )

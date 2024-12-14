@@ -104,4 +104,17 @@ export default {
       }
   }
   ],
+  preview: {
+    select: {
+      title: 'name',
+      media: 'img'
+    },
+    prepare(selection : any) {
+      const {title, media} = selection
+      return {
+        title,
+        media: selection.media
+      }
+  },
+  }, 
 }    

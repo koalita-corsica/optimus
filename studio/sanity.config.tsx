@@ -48,7 +48,7 @@ export default defineConfig({
   ],
 
   schema: {
-    types: schemaTypes, // Assurez-vous que schemaTypes est un tableau
+    types : schemaTypes, 
     templates: (prev: any) => {
       const categoryChild = {
         id: 'ledooda',
